@@ -13,16 +13,15 @@ Pronun (움성 처리 서버)는 "Pitching" 플랫폼의 인공지능 모델을 
 - [설치 및 배포](#설치-및-배포)
   - [1. 리포지토리 클론](#1-리포지토리-클론)
   - [2. 환경 변수 설정](#2-환경-변수-설정)
-  - [3. FFmpeg 설치](#3-ffmpeg-설치)
-  - [4. Docker 이미지 빌드](#4-docker-이미지-빌드)
-  - [5. Docker 컨테이너 실행](#5-docker-컨테이너-실행)
-  - [6. 로컬 테스트](#6-로컬-테스트)
-    - [6.1 사전 요구사항](#61-사전-요구사항)
-    - [6.2 의존성 설치](#62-의존성-설치)
-    - [6.3 환경 변수 설정](#63-환경-변수-설정)
-    - [6.4 FastAPI 서버 실행](#64-fastapi-서버-실행)
-    - [6.5 실행 확인](#65-실행-확인)
-    - [6.6 API 테스트](#66-api-테스트)
+  - [3. Docker 이미지 빌드](#3-docker-이미지-빌드)
+  - [4. Docker 컨테이너 실행](#4-docker-컨테이너-실행)
+  - [5. 로컬 테스트](#5-로컬-테스트)
+    - [5.1 사전 요구사항](#51-사전-요구사항)
+    - [5.2 의존성 설치](#52-의존성-설치)
+    - [5.3 환경 변수 설정](#53-환경-변수-설정)
+    - [5.4 FastAPI 서버 실행](#54-fastapi-서버-실행)
+    - [5.5 실행 확인](#55-실행-확인)
+  - [6 API 테스트](#6-api-테스트)
 - [CORS 설정](#cors-설정)
   - [발생한 이슈](#발생한-이슈)
   - [해결 방법](#해결-방법)
@@ -232,30 +231,7 @@ TRACE_SAMPLE_RATE=1.0
 
 ---
 
-## 3. FFmpeg 설치
-
-FFmpeg는 음성 코덱 변환에 필수적입니다. 사용 중인 운영체제에 맞게 설치하세요.
-
-### MacOS (Homebrew 사용)
-
-```bash
-brew install ffmpeg
-```
-
-### Ubuntu
-
-```bash
-sudo apt update
-sudo apt install ffmpeg
-```
-
-### Windows
-1. [FFmpeg 공식 웹사이트](https://ffmpeg.org/download.html)에서 Windows용 바이너리를 다운로드합니다.
-2. FFmpeg 설치 디렉토리를 **시스템 경로에 추가**합니다.
-
----
-
-## 4. Docker 이미지 빌드
+## 3. Docker 이미지 빌드
 
 프로젝트의 **Dockerfile**을 확인하고 이미지 빌드를 진행합니다.
 
@@ -307,7 +283,7 @@ docker build -t pronun-audio-processing .
 
 ---
 
-## 5. Docker 컨테이너 실행
+## 4. Docker 컨테이너 실행
 
 ```bash
 docker run -d -p 8001:8001 --name pronun-container pronun-audio-processing
@@ -317,20 +293,20 @@ docker run -d -p 8001:8001 --name pronun-container pronun-audio-processing
 
 ---
 
-## 6. 로컬 테스트
+## 5. 로컬 테스트
 
-### 6.1. 사전 요구사항
+### 5.1. 사전 요구사항
 - Python 3.9 이상
 - FFmpeg 설치 (위 설치 단계 참고)
 - `requirements.txt` 파일의 의존성 설치
 
-### 6.2. 의존성 설치
+### 5.2. 의존성 설치
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 6.3. 환경 변수 설정
+### 5.3. 환경 변수 설정
 
 로컬 환경에서 필요한 디렉토리를 설정합니다. `.env` 파일을 만들어 아래 내용을 추가하세요.
 
@@ -341,7 +317,7 @@ FEEDBACK_DIR=storage/output_feedback_frame
 
 설정된 디렉토리는 자동으로 생성됩니다.
 
-### 6.4. FastAPI 서버 실행
+### 5.4. FastAPI 서버 실행
 
 FastAPI 서버를 실행합니다. `main.py` 파일이 FastAPI 애플리케이션의 엔트리 포인트라고 가정합니다.
 
@@ -353,7 +329,7 @@ uvicorn main:app --host 0.0.0.0 --port 8001 --reload --log-config logging_config
 - **--port 8001**: 기본 포트 설정
 - **--reload**: 개발 환경에서 코드 변경 시 서버 자동 재시작
 
-### 6.5. 실행 확인
+### 5.5. 실행 확인
 
 서버가 성공적으로 실행되면 다음과 같은 메시지가 출력됩니다:
 
@@ -371,7 +347,7 @@ INFO:     Application startup complete.
 
 이제 설치와 배포가 완료되었습니다. 성공적으로 설정이 완료되었는지 확인하고, 필요한 경우 추가 테스트를 진행하세요.
 
-## 7. API 테스트
+## 6. API 테스트
 
 서버가 실행 중이면 [http://127.0.0.1:8001/docs](http://127.0.0.1:8001/docs)로 이동하여 Swagger UI에서 API를 테스트할 수 있습니다.
 
