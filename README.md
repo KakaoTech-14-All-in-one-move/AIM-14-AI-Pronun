@@ -437,7 +437,6 @@ GET /api/pronun/send-feedback/{video_id}
 
 - **FastAPI 문서**: [https://fastapi.tiangolo.com/](https://fastapi.tiangolo.com/)
 - **Docker 문서**: [https://docs.docker.com/](https://docs.docker.com/)
-- **FFmpeg 문서**: [https://ffmpeg.org/documentation.html/](https://ffmpeg.org/documentation.html/)
 - **Openai Audio API 문서**: [https://platform.openai.com/docs/guides/audio/](https://platform.openai.com/docs/guides/audio)
 - **FastAPI CORS 미들웨어**: [FastAPI CORS Middleware](https://fastapi.tiangolo.com/tutorial/cors/)
 
