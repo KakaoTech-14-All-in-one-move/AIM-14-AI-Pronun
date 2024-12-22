@@ -94,7 +94,7 @@ app.include_router(delete_files_router, prefix="/api/pronun", tags=["File Deleti
 @app.get("/")
 def read_root():
     logger.info("Root endpoint accessed")
-    return {"message": "Hello, Nina!"}
+    return {"message": "Hello, Selina!"}
 
 # 요청 로깅 미들웨어: 모든 요청과 응답을 로깅
 @app.middleware("http")
